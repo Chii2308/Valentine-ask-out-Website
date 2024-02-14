@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yes/No Button</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Amatic SC', cursive;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+            position: relative;
+        }
+
+        #container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #but {
+            margin-top: 20px;
+        }
+
+        #but button {
+            margin: 10px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #yesButton {
+            background-color: #78c850;
+            color: white;
+        }
+
+        #noButton {
+            background-color: #ff6666;
+            color: white;
+        }
+
+        h1 {
+            font-size: calc(48px + 10%);
+            margin-top: 20px;
+        }
+
+        img {
+            width: 70%;
+            max-width: calc(360px + 20%);
+            height: 70%;
+        }
+
+        #response {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: none;
+            width: 90%;
+            max-width: 300px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .pop-out {
+            animation: popOut 0.5s ease forwards;
+        }
+
+        @keyframes popOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+        }
+
+        @media (max-width: 600px) {
+            #container {
+                margin-top: 50px;
+            }
+            img {
+                width: 90%;
+            }
+            #but button {
+                padding: 10px 20px;
+            }
+        }
+
+        .big-text {
+            font-size: 30px;
+            font-weight: bold;
+            padding: 3px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        /* Heart Animation */
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: 
+        radial-gradient(circle at 30% 20%, transparent 5px, #ff4f6d 6px),
+        radial-gradient(circle at 40% 20%, transparent 5px, #ff4f6d 6px),
+        radial-gradient(circle at 60% 60%, transparent 5px, #ff4f6d 6px);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    animation: heart 4s infinite;
+    z-index: 999;
+    opacity: 10;
+    box-shadow: 0 0 0px rgba(255, 105, 180, 0.5);
+}
+
+        @keyframes heart {
+            0% {
+                top: -50px;
+                opacity: 0;
+                transform: rotate(45deg) scale(0);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                top: 100vh;
+                opacity: 0;
+                transform: rotate(45deg) scale(1);
+            }
+        }
+
+        .cover-block {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1cm;
+            background-color: #fbd6dc;
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <img src="/pokemon-pikachu-will-you-be-my-valentine-p6pjjlhcdeki4xrw.gif" alt="img" height="auto">
+        <div id="but">
+            <button id="yesButton" onclick="showValentineMessage()">YES</button>
+            <button id="noButton" onclick="NO()">NO</button>
+        </div>
+    </div>
+
+    <div id="response"></div>
+
+    <div class="hearts-background"></div>
+
+    <script>
+        const container = document.getElementById('container');
+        const response = document.getElementById('response');
+        const pikachuImg = document.querySelector('#container img');
+        const buttonsContainer = document.querySelector('#but');
+
+        function showValentineMessage() {
+    container.innerHTML = "<h1 style='font-size: 60px; font-weight: bold;'>Happy Valentine's Day Erii!</h1>"; // Increase font size and make it bold
+
+    container.style.paddingTop = "100px";
+
+    document.body.style.backgroundColor = "#fbd6dc";
+
+    pikachuImg.style.display = 'none';
+    buttonsContainer.style.display = 'none';
+
+    response.style.display = "none";
+
+    const newImg = document.createElement('img');
+    newImg.src = "chiii catto.png";
+    newImg.alt = "chiii catto";
+    newImg.style.width = "50%";
+    container.appendChild(newImg);
+
+    const envelopeBtn = document.createElement('button');
+    envelopeBtn.innerHTML = "<img src='envelope.png' alt='envelope' style='width: 50px; height: 50px;'>";
+    envelopeBtn.style.backgroundColor = "transparent";
+    envelopeBtn.style.border = "none";
+    envelopeBtn.style.cursor = "pointer";
+    envelopeBtn.style.position = "absolute";
+    envelopeBtn.style.middle = "1px";
+    envelopeBtn.style.bottom = "280px";
+    envelopeBtn.onclick = function() {
+        hidePage();
+    };
+
+    container.appendChild(envelopeBtn);
+
+    // Insert text below the envelope button
+    const letterText = document.createElement('div');
+    letterText.textContent = "a letter from Chii";
+    letterText.style.fontSize = "40px";
+    letterText.style.fontWeight = "bold"; // Make it bold
+    letterText.style.marginTop = "10px";
+    container.appendChild(letterText);
+
+    setTimeout(function() {
+        generateHearts();
+        const coverBlock = document.createElement('div');
+        coverBlock.classList.add('cover-block');
+        document.body.appendChild(coverBlock);
+    }, 500);
+}
+
+        function NO() {
+            const noButton = document.getElementById('noButton');
+            noButton.classList.add('pop-out');
+            setTimeout(function() {
+                noButton.style.display = "none";
+                showResponse();
+            }, 500);
+        }
+
+        function showResponse() {
+            response.innerHTML = "<p class='big-text'>Weii you clicked NOOO! <br>Say yesss 😡!!</p>";
+            response.style.display = "block";
+            setTimeout(function() {
+                response.style.display = "none";
+            }, 3000);
+        }
+
+        function generateHearts() {
+            const heartsContainer = document.querySelector('.hearts-background');
+            const numHearts = 30;
+
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                const left = Math.random() * 100 + 'vw';
+                heart.style.left = left;
+                const delay = Math.random() * 10 + 's';
+                heart.style.animationDelay = delay;
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        function hidePage() {
+    const body = document.querySelector('body');
+    const container = document.querySelector('#container');
+    body.style.transition = "background-color 1s ease";
+    container.style.transition = "opacity 1s ease";
+    body.style.backgroundColor = "#fff"; // Change background color to white
+    container.style.opacity = "0";
+
+    // Clear hearts container
+    const heartsContainer = document.querySelector('.hearts-background');
+    heartsContainer.innerHTML = "";
+
+    // Remove cover block
+    const coverBlock = document.querySelector('.cover-block');
+    if (coverBlock) {
+        coverBlock.remove();
+    }
+
+    // Add a big rectangle border if not already added
+    if (!document.getElementById('rectangleBorder')) {
+        const rectangleBorder = document.createElement('div');
+        rectangleBorder.id = 'rectangleBorder';
+        rectangleBorder.style.position = 'absolute';
+        rectangleBorder.style.top = '50%';
+        rectangleBorder.style.left = '50%';
+        rectangleBorder.style.transform = 'translate(-50%, -50%)';
+        rectangleBorder.style.width = '80%';
+        rectangleBorder.style.height = '80%';
+        rectangleBorder.style.border = '4px solid black'; // Modify border properties as needed
+        rectangleBorder.style.zIndex = '999';
+        
+        // Add the provided paragraph inside the rectangle
+        const paragraph = document.createElement('p');
+        paragraph.textContent = "My dearest Erii, on this Valentine's Day, I want to remind you of the incredible love that binds us together. Every moment spent with you feels like a cherished gift; our laughter and your presence fill my heart with warmth and my cute little panda pls pls refrain from being mean towards me, it's hard for me to take it or else I might have to give you a bonk in person, anyway's today, as we celebrate our love, I am grateful for everything that has happened. You mean the world to me, and Happy Valentine's Day, my love. Here's to many more beautiful moments together.....";
+        paragraph.style.padding = '20px';
+        paragraph.style.fontSize = '60px'; // Increase text size by 50
+        
+        rectangleBorder.appendChild(paragraph);
+
+        // Add "from Chetan" text in the bottom right corner
+        const fromChetan = document.createElement('p');
+        fromChetan.textContent = "from Chetan";
+        fromChetan.style.position = 'absolute';
+        fromChetan.style.bottom = '10px';
+        fromChetan.style.right = '10px';
+        fromChetan.style.fontSize = '40px';
+        fromChetan.style.color = 'gray'; // Adjust color as needed
+        fromChetan.style.fontWeight = 'bold'; // Make the text bold
+
+        rectangleBorder.appendChild(fromChetan);
+        
+        // Add heart icon to the top right corner
+        const heartIcon = document.createElement('i');
+        heartIcon.className = 'fas fa-heart';
+        heartIcon.style.position = 'absolute';
+        heartIcon.style.top = '10px';
+        heartIcon.style.right = '10px';
+        heartIcon.style.fontSize = 'px'; // Adjust font size as needed
+        
+        rectangleBorder.appendChild(heartIcon);
+        
+        body.appendChild(rectangleBorder);
+    }
+}
+
+    </script>
+</body>
+
+</html>
